@@ -86,14 +86,6 @@ const InvoiceFilter = ({handleChange, handleSubmit, persons, filter}) => {
                         value="Filtrovat faktury"
                     />
                 </div>
-                <div className="col">
-                    <input
-                        type="submit"
-                        className="btn btn-secondary float-right mt-2"
-                        value="Filtrovat faktury"
-                        
-                    />
-                </div>
             </div>
         </form>
     );
