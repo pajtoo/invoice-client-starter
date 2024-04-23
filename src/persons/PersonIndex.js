@@ -35,7 +35,7 @@ const PersonIndex = () => {
             await apiDelete("/api/persons/" + id);
         } catch (error) {
             console.log(error.message);
-            alert(error.message);
+            setErrorState("Nastala chyba při mazání osoby: " + error.message);
         }
         setPersons(persons.filter((item) => item._id !== id));
     };
