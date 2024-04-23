@@ -23,11 +23,12 @@
 import React, {useEffect, useState} from "react";
 
 import {apiDelete, apiGet} from "../utils/api";
-
+import FlashMessage from "../components/FlashMessage";
 import PersonTable from "./PersonTable";
 
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
+    const [errorState, setErrorState] = useState(null);
 
     const deletePerson = async (id) => {
         try {
@@ -40,17 +41,25 @@ const PersonIndex = () => {
     };
 
     useEffect(() => {
-        apiGet("/api/persons").then((data) => setPersons(data));
+        apiGet("/api/persons")
+            .then((data) => setPersons(data))
+            .catch(error => {
+                console.log(error);
+                console.log(error.message);
+                console.error(error);
+                setErrorState("Nastala chyba při načítání osob: " + error.message);
+            });
     }, []);
 
     return (
         <div>
             <h1>Seznam osob</h1>
+            {errorState ? <FlashMessage theme="danger" text={errorState} /> :
             <PersonTable
                 deletePerson={deletePerson}
                 items={persons}
                 label="Počet osob:"
-            />
+            />}
         </div>
     );
 };

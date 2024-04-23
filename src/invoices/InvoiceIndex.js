@@ -18,18 +18,19 @@ const InvoiceIndex = () => {
         limit: 20
     });
 
+    const [errorState, setErrorState] = useState(null);
+
     useEffect(() => {
         apiGet("/api/invoices")
             .then(data => { setInvoices(data) })
             .catch(error => {
                 console.log(error);
-                <FlashMessage theme="danger" text={"Nastala chyb při načítání faktur: " + error.message} />;
+                setErrorState("Nastala chyb při načítání faktur: " + error.message);
             });
         apiGet("/api/persons") // Stažení osob pro Select kupujících a prodávajících ve filtru    
             .then(data => { setPersonList(data) })
             .catch(error => {
                 console.log(error);
-                <FlashMessage theme="danger" text={"Nastala chyba při načítání osob do filtru: " + error.message} />;
             });
     }, []);
 
@@ -39,7 +40,7 @@ const InvoiceIndex = () => {
         }
         catch (error) {
             console.log(error);
-            <FlashMessage theme="danger" text={"Nastala chyba při mazání faktury: " + error.message} />;
+            setErrorState("Nastala chyba při mazání faktury: " + error.message);
         }
         setInvoices(invoices.filter((invoice) => invoice._id !== id));
     }
@@ -72,7 +73,8 @@ const InvoiceIndex = () => {
 
         <InvoicesStatistics invoices={invoices} />
         <h1>Seznam faktur</h1>
-        <InvoiceTable label="Počet faktur: " invoices={invoices} deleteInvoice={deleteInvoice} />
+        {errorState ? <FlashMessage theme="danger" text={errorState} /> :
+            <InvoiceTable label="Počet faktur: " invoices={invoices} deleteInvoice={deleteInvoice} />}
 
         <Link to={"/invoices/create"} className="btn btn-success">Nová faktura</Link>
     </div>);
