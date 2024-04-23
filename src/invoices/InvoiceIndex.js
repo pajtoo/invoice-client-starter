@@ -69,12 +69,12 @@ const InvoiceIndex = () => {
 
     return (<div>
 
+        {errorState && <FlashMessage theme="danger" text={errorState} />}
         <InvoiceFilter filter={filter} handleChange={handleChange} handleSubmit={handleSubmit} persons={personList} />
 
         <InvoicesStatistics invoices={invoices} />
         <h1>Seznam faktur</h1>
-        {errorState ? <FlashMessage theme="danger" text={errorState} /> :
-            <InvoiceTable label="Počet faktur: " invoices={invoices} deleteInvoice={deleteInvoice} />}
+        <InvoiceTable label="Počet faktur: " invoices={invoices} deleteInvoice={deleteInvoice} />
 
         <Link to={"/invoices/create"} className="btn btn-success">Nová faktura</Link>
     </div>);

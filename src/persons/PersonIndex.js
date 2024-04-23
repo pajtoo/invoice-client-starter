@@ -53,13 +53,13 @@ const PersonIndex = () => {
 
     return (
         <div>
+            {errorState && <FlashMessage theme="danger" text={errorState} />}
             <h1>Seznam osob</h1>
-            {errorState ? <FlashMessage theme="danger" text={errorState} /> :
             <PersonTable
                 deletePerson={deletePerson}
                 items={persons}
                 label="Počet osob:"
-            />}
+            />
         </div>
     );
 };
