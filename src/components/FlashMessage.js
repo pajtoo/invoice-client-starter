@@ -14,7 +14,7 @@ export const FlashMessage = ({ theme, text }) => {
             {text}
           </div>
           <div className="col">
-            <button type="button" className="btn" onClick={() => {setIsVisible(false)}}>x</button>
+            <button type="button" className="btn" onClick={handleClose}>x</button>
           </div>
         </div>
       </div>
