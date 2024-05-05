@@ -58,7 +58,7 @@ const InvoiceTable = ({ label, invoices, deleteInvoice }) => {
                                     Upravit
                                 </Link>
                                 <button
-                                    onClick={() => deleteInvoice(invoice._id)}
+                                    onClick={() => deleteInvoice(invoice._id, invoice.invoiceNumber)}
                                     className="btn btn-sm btn-danger"
 
                                 >

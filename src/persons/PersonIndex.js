@@ -29,10 +29,12 @@ import PersonTable from "./PersonTable";
 const PersonIndex = () => {
     const [persons, setPersons] = useState([]);
     const [errorState, setErrorState] = useState(null);
+    const [deleteSuccess, setDeleteSuccess] = useState(null);
 
-    const deletePerson = async (id) => {
+    const deletePerson = async (id, name) => {
         try {
             await apiDelete("/api/persons/" + id);
+            setDeleteSuccess("Osoba / společnost " + name + " byla úspěšně odstraněna.")
         } catch (error) {
             console.log(error.message);
             setErrorState("Nastala chyba při mazání osoby: " + error.message);
@@ -54,6 +56,7 @@ const PersonIndex = () => {
     return (
         <div>
             {errorState && <FlashMessage theme="danger" text={errorState} />}
+            {deleteSuccess && <FlashMessage theme="success" text={deleteSuccess} />}
             <h1>Seznam osob</h1>
             <PersonTable
                 deletePerson={deletePerson}

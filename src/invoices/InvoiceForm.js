@@ -69,7 +69,7 @@ const InvoiceForm = () => {
             .then(() => {
                 setTimeout(() => {
                     navigate("/invoices")
-                }, 2000);
+                }, 3000);
                 setSuccessState(true);
             })
             .catch((error) => {

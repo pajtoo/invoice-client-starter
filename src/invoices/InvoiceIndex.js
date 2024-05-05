@@ -19,6 +19,7 @@ const InvoiceIndex = () => {
     });
 
     const [errorState, setErrorState] = useState(null);
+    const [deleteSuccess, setDeleteSuccess] = useState(null);
 
     useEffect(() => {
         apiGet("/api/invoices")
@@ -34,9 +35,10 @@ const InvoiceIndex = () => {
             });
     }, []);
 
-    const deleteInvoice = async (id) => {
+    const deleteInvoice = async (id, invoiceNumber) => {
         try {
             await apiDelete("/api/invoices/" + id);
+            setDeleteSuccess("Faktura číslo " + invoiceNumber + "byla úspěšně odstraněna.")
         }
         catch (error) {
             console.log(error);
@@ -70,6 +72,7 @@ const InvoiceIndex = () => {
     return (<div>
 
         {errorState && <FlashMessage theme="danger" text={errorState} />}
+        {deleteSuccess && <FlashMessage theme="success" text={deleteSuccess} />}
         <InvoiceFilter filter={filter} handleChange={handleChange} handleSubmit={handleSubmit} persons={personList} />
 
         <InvoicesStatistics invoices={invoices} />

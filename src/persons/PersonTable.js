@@ -60,7 +60,7 @@ const PersonTable = ({ label, items, deletePerson }) => {
                                         Upravit
                                     </Link>
                                     <button
-                                        onClick={() => deletePerson(item._id)}
+                                        onClick={() => deletePerson(item._id, item.name)}
                                         className="btn btn-sm btn-danger"
                                     >
                                         Odstranit
