@@ -4,10 +4,9 @@ export const FlashMessage = ({ theme, text }) => {
 
   const [isVisible, setIsVisible] = useState(true);
 
-  const handleClose = () => setIsVisible(true)
+  const handleClose = () => setIsVisible(true);
 
-  return
-  (<>
+  return (<>
     {isVisible && <div className={"sticky-top z-1 alert alert-" + theme}>
       <div className="container-fluid">
         <div className="row justify-content-between">
