@@ -1,0 +1,5 @@
+.sticky-top-flashmessage {
+    position: sticky;
+    top: 2rem;
+    z-index: 1025;
+}
